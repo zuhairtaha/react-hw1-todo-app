@@ -1,35 +1,36 @@
-const books = [
-    {
-        title: 'Harry Potter and the Chamber of Secrets',
-        author: 'J.K. Rowling',
-    },
-    {
-        title: 'Jurassic Park',
-        author: 'Michael Crichton',
-    },
-]
-
-const authors = [
-    {id: 1, name: 'J.K. Rowling'},
-    {id: 2, name: 'Michael Crichton'},
-]
+import Category from "../models/category"
+import Task from "../models/task"
 
 const resolvers = {
-    Query: {
-        authors(root, args, context, info) {
-            return authors
-            //return find(authors, {id: args.id})
-        },
-        author(root, args, context, info) {
-            console.log(args.id)
-            return authors.filter(a => a.id = args.id)
-        }
+  Query: {
+    categories: () => Category.find(),
+    tasks: () => Task.find(),
+    task: (_, args) => Task.findById(args.id),
+    category: (_, args) => Category.findById(args.id)
+  },
+  Category: {
+    tasks: (parentValue) => Task.find({"categoryid": parentValue.id})
+  },
+  Mutation: {
+    addCategory: (root, args, context, info) => {
+      let category = new Category({
+        title: args.title,
+        description: args.description,
+      })
+      return category.save()
     },
-    Author: {
-        books(author) {
-            return filter(books, {author: author.name})
-        },
-    },
+
+    addTask: (root, args, context, info) => {
+      let task = new Task({
+        categoryid: args.categoryid,
+        description: args.description,
+        deadline: args.deadline,
+        done: args.done,
+        important: args.important,
+      })
+      return task.save()
+    }
+  }
 }
 
-module.exports = resolvers
+export default resolvers
