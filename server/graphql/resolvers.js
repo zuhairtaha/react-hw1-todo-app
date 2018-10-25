@@ -12,22 +12,15 @@ const resolvers = {
     tasks: (parentValue) => Task.find({"categoryid": parentValue.id})
   },
   Mutation: {
-    addCategory: (root, args, context, info) => {
-      let category = new Category({
-        title: args.title,
-        description: args.description,
-      })
+    addCategory: (_, args) => {
+      const {title, description} = args
+      let category = new Category({title, description})
       return category.save()
     },
 
-    addTask: (root, args, context, info) => {
-      let task = new Task({
-        categoryid: args.categoryid,
-        description: args.description,
-        deadline: args.deadline,
-        done: args.done,
-        important: args.important,
-      })
+    addTask: (_, args) => {
+      const {categoryid, description, deadline, done, important} = args
+      let task = new Task({categoryid, description, deadline, done, important})
       return task.save()
     }
   }
