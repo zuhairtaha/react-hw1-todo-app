@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
 // create tasks schema and model
 const Task = mongoose
@@ -26,4 +26,4 @@ const Task = mongoose
     }, {
         timestamps: true
     }))
-module.exports = Task
+export default Task

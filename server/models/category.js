@@ -1,5 +1,4 @@
-const mongoose = require("mongoose")
-
+import mongoose from "mongoose"
 
 // create categories schema and model
 const Category = mongoose
@@ -19,4 +18,4 @@ const Category = mongoose
         timestamps: true
     }))
 
-module.exports = Category
+export default Category

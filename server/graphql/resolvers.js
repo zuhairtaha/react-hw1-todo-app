@@ -1,5 +1,3 @@
-const {find, filter} = require('lodash')
-
 const books = [
     {
         title: 'Harry Potter and the Chamber of Secrets',
@@ -12,15 +10,20 @@ const books = [
 ]
 
 const authors = [
-    {name: 'J.K. Rowling'},
-    {name: 'Michael Crichton'},
+    {id: 1, name: 'J.K. Rowling'},
+    {id: 2, name: 'Michael Crichton'},
 ]
 
 const resolvers = {
     Query: {
-        author(root, args, context, info) {
-            return find(authors, {id: args.id})
+        authors(root, args, context, info) {
+            return authors
+            //return find(authors, {id: args.id})
         },
+        author(root, args, context, info) {
+            console.log(args.id)
+            return authors.filter(a => a.id = args.id)
+        }
     },
     Author: {
         books(author) {
