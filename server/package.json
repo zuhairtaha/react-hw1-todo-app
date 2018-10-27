@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node -r esm app.js",
+    "start": "node app.js",
     "startt": "NODE_ENV=production node -r esm app.js",
     "dev": "set NODE_ENV=development & nodemon -r esm app.js"
   },
