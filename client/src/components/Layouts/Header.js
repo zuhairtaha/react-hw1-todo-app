@@ -33,7 +33,7 @@ function Header(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             ToDo App
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button href="https://hackyourfuture.dk/" target="_blank" color="inherit">hyf</Button>
         </Toolbar>
       </AppBar>
     </div>

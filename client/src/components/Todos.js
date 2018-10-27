@@ -5,12 +5,17 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Delete'
-import StarIcon from '@material-ui/icons/Star'
+import IconDelete from '@material-ui/icons/Delete'
+import IconStar from '@material-ui/icons/Star'
+import IconStarBorder from '@material-ui/icons/StarBorder'
+import Query from "react-apollo/Query"
+import {GetTasks} from "./queries"
+import Loading from "./Layouts/Loading"
 
 class Todos extends React.Component {
   state = {
     checked: [0],
+    todos: []
   }
 
   handleToggle = value => () => {
@@ -28,36 +33,36 @@ class Todos extends React.Component {
       checked: newChecked,
     })
   }
+  setTodos = todos => this.setState({todos: todos})
 
-  render() {
-    return (
-      <div>
-        <List>
-          {[0, 1, 2, 3].map(value => (
-            <ListItem key={value} role={undefined} dense button onClick={this.handleToggle(value)}>
+  render = () =>
+    <List>
+      <Query query={GetTasks}>
+        {({loading, error, data}) => {
+          if (loading) return <Loading/>
+          if (error) return <p>Error {error.message}</p>
+          return data.tasks.map(({description, deadline, important, _id, done, createdAt}) =>
+            <ListItem key={_id} role={undefined} dense button onClick={this.handleToggle(description)}>
               <Checkbox
-                checked={this.state.checked.indexOf(value) !== -1}
+                checked={this.state.checked.indexOf(description) !== -1}
                 tabIndex={-1}
-                disableRipple
               />
-              <ListItemText primary={`Line item ${value + 1}`} secondary="secondary text"/>
+              <ListItemText
+                primary={description}
+                secondary={createdAt}/>
               <ListItemSecondaryAction>
 
+                <IconButton aria-label="Comments"><IconDelete/></IconButton>
                 <IconButton aria-label="Comments">
-                  <DeleteIcon/>
+                  {important ? <IconStar/> : <IconStarBorder/>}
                 </IconButton>
-
-                <IconButton aria-label="Comments">
-                  <StarIcon/>
-                </IconButton>
-
               </ListItemSecondaryAction>
             </ListItem>
-          ))}
-        </List>
-      </div>
-    )
-  }
+          )
+        }}
+      </Query>
+    </List>
+
 }
 
 export default Todos

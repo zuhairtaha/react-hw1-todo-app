@@ -7,7 +7,7 @@ class CenterContainer extends React.Component {
   render = () =>
     <div className="center-container">
       <Grid container>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           <Paper className="center">
             {this.props.children}
           </Paper>

@@ -1,9 +1,11 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import ApolloClient from "apollo-boost"
 import {ApolloProvider} from "react-apollo"
 import {Header} from "./components/Layouts"
 import CenterContainer from "./components/Layouts/CenterContainer"
 import Todos from "./components/Todos"
+import AddTodoDialog from "./components/crud/AddTodoDialog"
+import Footer from "./components/Layouts/Footer"
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql"
@@ -12,12 +14,16 @@ const client = new ApolloClient({
 class App extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>
+      <Fragment>
         <Header/>
         <CenterContainer>
-          <Todos/>
+          <ApolloProvider client={client}>
+            <Todos/>
+            <AddTodoDialog/>
+          </ApolloProvider>
         </CenterContainer>
-      </ApolloProvider>
+        <Footer/>
+      </Fragment>
     )
   }
 }
