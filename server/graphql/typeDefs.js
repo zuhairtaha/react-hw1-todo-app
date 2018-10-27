@@ -1,4 +1,4 @@
-import {gql} from "apollo-server-express"
+const {gql} = require("apollo-server-express")
 
 const typeDefs = gql`
   type Category {
@@ -33,5 +33,4 @@ const typeDefs = gql`
     addTask(categoryid: String, description: String!, deadline: String!, done: Boolean, important: Boolean): Task
   }
 `
-
-export default typeDefs
+module.exports = typeDefs

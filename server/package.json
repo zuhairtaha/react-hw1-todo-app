@@ -5,13 +5,14 @@
   "scripts": {
     "start": "node index.js",
     "startt": "NODE_ENV=production node -r esm app.js",
-    "dev": "set NODE_ENV=development & nodemon -r esm app.js"
+    "dev": "set NODE_ENV=development & nodemon -r esm app.js",
+    "build": "babel src/ -d dist/ "
   },
   "dependencies": {
     "apollo-server-express": "^2.1.0",
-    "esm": "^3.0.84",
     "express": "^4.16.4",
     "graphql": "^14.0.2",
     "mongoose": "^5.3.6"
-  }
+  },
+  "devDependencies": {}
 }

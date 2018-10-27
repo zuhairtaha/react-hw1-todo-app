@@ -8,7 +8,7 @@ import AddTodoDialog from "./components/crud/AddTodoDialog"
 import Footer from "./components/Layouts/Footer"
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  uri: "https://todos-hyf.herokuapp.com/graphql"
 })
 
 class App extends Component {

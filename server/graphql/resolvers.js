@@ -1,5 +1,5 @@
-import Category from "../models/category"
-import Task from "../models/task"
+const Category = require("../models/category")
+const Task = require("../models/task")
 
 const resolvers = {
   Query: {
@@ -25,5 +25,4 @@ const resolvers = {
     }
   }
 }
-
-export default resolvers
+module.exports = resolvers
