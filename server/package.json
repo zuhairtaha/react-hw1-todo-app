@@ -1,9 +1,9 @@
 {
   "name": "server",
   "version": "0.0.0",
-  "private": true,
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node index.js",
     "startt": "NODE_ENV=production node -r esm app.js",
     "dev": "set NODE_ENV=development & nodemon -r esm app.js"
   },
